@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:order_tracking/model/order.dart';
 import 'package:order_tracking/model/order_status.dart';
 import 'package:order_tracking/shared/utils/styles/app_styles.dart';
 import 'package:order_tracking/shared/utils/theme/app_colors.dart';
 import 'package:order_tracking/shared/widgets/app_spacing.dart';
 import 'package:order_tracking/view/order_status_view.dart';
 import 'package:provider/provider.dart';
+
+import '../../viewmodel/status_viewmodel.dart';
 
 class OrderTrackerContainer extends StatefulWidget {
   const OrderTrackerContainer({
@@ -46,7 +49,7 @@ class _OrderTrackerContainerState extends State<OrderTrackerContainer> {
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     Text(
-                      "#235555",
+                      Order.order.orderId,
                       style: AppStyle.smallTextRegular(
                           color: AppColors.greyScale2),
                     )

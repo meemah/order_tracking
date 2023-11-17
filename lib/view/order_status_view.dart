@@ -1,9 +1,7 @@
-import 'package:ably_flutter/ably_flutter.dart' as ably;
 import 'package:flutter/material.dart';
 import 'package:order_tracking/model/order_status.dart';
-import 'package:order_tracking/shared/utils/constants/app_constants.dart';
 import 'package:order_tracking/shared/widgets/app_spacing.dart';
-import 'package:order_tracking/viewmodel/auth_viewmodel.dart';
+import 'package:order_tracking/viewmodel/status_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -80,30 +78,5 @@ class _OrderStatusViewState extends State<OrderStatusView> {
         ),
       ),
     );
-  }
-}
-
-class StatusViewModel extends ChangeNotifier {
-  NetworkDataResponse<String> _status = NetworkDataResponse.completed("placed");
-
-  NetworkDataResponse<String> get status => _status;
-
-  set status(NetworkDataResponse<String> value) {
-    _status = value;
-    notifyListeners();
-  }
-
-  setOrderStatus() {
-    final clientOptions = ably.ClientOptions(key: AppConstants.ablyKey);
-    ably.Realtime realtime = ably.Realtime(options: clientOptions);
-    realtime.connection.on().listen((ably.ConnectionStateChange event) async {
-      if (event.current == ably.ConnectionState.connected) {
-        final channel = realtime.channels.get('order');
-        var messageStream = channel.subscribe();
-        messageStream.listen((ably.Message message) {
-          status = NetworkDataResponse.completed(message.data.toString());
-        });
-      }
-    });
   }
 }

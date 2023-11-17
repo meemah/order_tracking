@@ -50,20 +50,25 @@ class HomeView extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Row(
                       children: [
                         Expanded(
-                            child: OrderDetailContainer(
-                                title: "Order ID", subTitle: "#235555")),
+                          child: OrderDetailContainer(
+                            title: "Order ID",
+                            subTitle: Order.order.orderId,
+                          ),
+                        ),
                         OrderDetailContainer(
-                            title: "Order Date", subTitle: "Wed, Nov 15,2023"),
+                          title: "Order Date",
+                          subTitle: Order.order.formattedDate,
+                        ),
                       ],
                     ),
-                    YMargin(25),
+                    const YMargin(25),
                     OrderDetailContainer(
-                        title: "Order Type", subTitle: "Instant"),
+                        title: "Order Type", subTitle: Order.order.orderType),
                   ],
                 ),
               ),
@@ -75,9 +80,9 @@ class HomeView extends StatelessWidget {
               const YMargin(20),
               ListView.separated(
                 shrinkWrap: true,
-                itemCount: Order.orders.length,
+                itemCount: OrderItem.orders.length,
                 itemBuilder: (context, index) {
-                  Order order = Order.orders[index];
+                  OrderItem order = OrderItem.orders[index];
                   return Row(
                     children: [
                       Container(

@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:order_tracking/shared/locator.dart';
-import 'package:order_tracking/view/order_status_view.dart';
 import 'package:order_tracking/view/sign_in_view.dart';
 import 'package:order_tracking/viewmodel/auth_viewmodel.dart';
+import 'package:order_tracking/viewmodel/status_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
