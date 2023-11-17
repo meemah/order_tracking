@@ -1,15 +1,17 @@
 import 'package:ably_flutter/ably_flutter.dart' as ably;
 import 'package:flutter/material.dart';
+import 'package:order_tracking/model/order_status.dart';
 
 import '../shared/utils/constants/app_constants.dart';
 import '../shared/utils/network_helper/network_data_response.dart';
 
 class StatusViewModel extends ChangeNotifier {
-  NetworkDataResponse<String> _status = NetworkDataResponse.completed("placed");
+  NetworkDataResponse<OrderStatus> _status =
+      NetworkDataResponse.completed(OrderStatus.placed);
 
-  NetworkDataResponse<String> get status => _status;
+  NetworkDataResponse<OrderStatus> get status => _status;
 
-  set status(NetworkDataResponse<String> value) {
+  set status(NetworkDataResponse<OrderStatus> value) {
     _status = value;
     notifyListeners();
   }
@@ -22,7 +24,12 @@ class StatusViewModel extends ChangeNotifier {
         final channel = realtime.channels.get('order');
         var messageStream = channel.subscribe();
         messageStream.listen((ably.Message message) {
-          status = NetworkDataResponse.completed(message.data.toString());
+          String statusMessage = message.data.toString();
+          if (OrderStatus.values.toString().contains(statusMessage)) {
+            status = NetworkDataResponse.completed(OrderStatus.values
+                .firstWhere((element) =>
+                    statusMessage.toLowerCase() == element.name.toLowerCase()));
+          }
         });
       }
     });

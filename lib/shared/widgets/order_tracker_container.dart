@@ -57,9 +57,9 @@ class _OrderTrackerContainerState extends State<OrderTrackerContainer> {
                 ),
                 const YMargin(20),
                 Row(
-                    children: OrderStatus.statusHistory
+                    children: OrderStatusModel.statusHistory
                         .asMap()
-                        .map((int i, OrderStatus element) => MapEntry(
+                        .map((int i, OrderStatusModel element) => MapEntry(
                             i,
                             Expanded(
                               child: Container(
@@ -67,9 +67,8 @@ class _OrderTrackerContainerState extends State<OrderTrackerContainer> {
                                 height: 5.h,
                                 decoration: BoxDecoration(
                                     color:
-                                        viewModel.status.data?.toLowerCase() ==
-                                                element.orderStatus.name
-                                                    .toLowerCase()
+                                        (viewModel.status.data?.index ?? 0) >=
+                                                element.orderStatus.index
                                             ? Colors.green
                                             : Colors.grey.shade200,
                                     borderRadius: BorderRadius.circular(8)),

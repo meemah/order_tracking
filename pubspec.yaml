@@ -46,6 +46,7 @@ dependencies:
   firebase_auth: ^4.14.0
   timeline_tile: ^2.0.0
   google_sign_in: ^6.1.6
+  timelines: ^0.1.0
 
 dev_dependencies:
   flutter_test:
