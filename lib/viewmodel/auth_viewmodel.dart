@@ -8,40 +8,52 @@ import '../shared/utils/network_helper/network_data_response.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepo authRepo = serviceLocator<AuthRepo>();
-  NetworkDataResponse<UserCredential> _signInResponse =
+  NetworkDataResponse<UserCredential> _googleSignInResponse =
       NetworkDataResponse.idle();
 
-  NetworkDataResponse<UserCredential> get signInResponse => _signInResponse;
+  NetworkDataResponse<UserCredential> get googleSignInResponse =>
+      _googleSignInResponse;
 
-  set signInResponse(NetworkDataResponse<UserCredential> value) {
-    _signInResponse = value;
+  set googleSignInResponse(NetworkDataResponse<UserCredential> value) {
+    _googleSignInResponse = value;
+    notifyListeners();
+  }
+
+  NetworkDataResponse<UserCredential> _githubSignInResponse =
+      NetworkDataResponse.idle();
+
+  NetworkDataResponse<UserCredential> get githubSignInResponse =>
+      _githubSignInResponse;
+
+  set githubSignInResponse(NetworkDataResponse<UserCredential> value) {
+    _githubSignInResponse = value;
     notifyListeners();
   }
 
   gitHubSignIn() async {
-    signInResponse = NetworkDataResponse.loading("Processing");
+    githubSignInResponse = NetworkDataResponse.loading("Processing");
     try {
       var resp = await authRepo.githubSignIn();
-      signInResponse = NetworkDataResponse.completed(resp);
+      githubSignInResponse = NetworkDataResponse.completed(resp);
     } on FirebaseAuthException catch (e) {
-      signInResponse = NetworkDataResponse.error(e.message.toString());
+      githubSignInResponse = NetworkDataResponse.error(e.message.toString());
       AppToast.showFlashToast(e.message.toString());
     } catch (e) {
-      signInResponse = NetworkDataResponse.error(e.toString());
+      githubSignInResponse = NetworkDataResponse.error(e.toString());
       AppToast.showFlashToast(e.toString());
     }
   }
 
   googleSignIn() async {
-    signInResponse = NetworkDataResponse.loading("Processing");
+    googleSignInResponse = NetworkDataResponse.loading("Processing");
     try {
       var resp = await authRepo.googleSignIn();
-      signInResponse = NetworkDataResponse.completed(resp);
+      googleSignInResponse = NetworkDataResponse.completed(resp);
     } on FirebaseAuthException catch (e) {
-      signInResponse = NetworkDataResponse.error(e.message.toString());
+      googleSignInResponse = NetworkDataResponse.error(e.message.toString());
       AppToast.showFlashToast(e.message.toString());
     } catch (e) {
-      signInResponse = NetworkDataResponse.error(e.toString());
+      googleSignInResponse = NetworkDataResponse.error(e.toString());
       AppToast.showFlashToast(e.toString());
     }
   }

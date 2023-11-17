@@ -46,17 +46,20 @@ class SignInView extends StatelessWidget {
                   children: [
                     Expanded(
                         child: SignInButton(
+                            isLoading: viewModel.googleSignInResponse.status ==
+                                Status.LOADING,
                             color: Colors.red,
                             imageUrl: "assets/icons/google.png",
                             onTap: () async {
                               await viewModel.googleSignIn();
-                              if (viewModel.signInResponse.status ==
-                                  Status.COMPLETED) {
+                              if (viewModel.googleSignInResponse.status ==
+                                      Status.COMPLETED &&
+                                  viewModel.googleSignInResponse.data != null) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (ctx) {
                                   return HomeView(
                                     userCredential:
-                                        viewModel.signInResponse.data!,
+                                        viewModel.googleSignInResponse.data!,
                                   );
                                 }));
                               }
@@ -64,17 +67,20 @@ class SignInView extends StatelessWidget {
                     const XMargin(10),
                     Expanded(
                         child: SignInButton(
+                            isLoading: viewModel.githubSignInResponse.status ==
+                                Status.LOADING,
                             color: Colors.black,
                             imageUrl: "assets/icons/github.png",
                             onTap: () async {
                               await viewModel.gitHubSignIn();
-                              if (viewModel.signInResponse.status ==
-                                  Status.COMPLETED) {
+                              if (viewModel.githubSignInResponse.status ==
+                                      Status.COMPLETED &&
+                                  viewModel.githubSignInResponse.data != null) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (ctx) {
                                   return HomeView(
                                     userCredential:
-                                        viewModel.signInResponse.data!,
+                                        viewModel.githubSignInResponse.data!,
                                   );
                                 }));
                               }

@@ -79,6 +79,7 @@ class HomeView extends StatelessWidget {
               ),
               const YMargin(20),
               ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: OrderItem.orders.length,
                 itemBuilder: (context, index) {
