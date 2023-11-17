@@ -3,18 +3,14 @@
 Real Time on Ably Steps:
 - This can also be found under lib/viewmodel/status_viewmodel.dart
 
-To use the app on Ably:
-1. You can find the api key in lib/shared/utils/app_constants.dart - 
+or you can follow:
 
-ideally this key is meant to be in a special .env file and also shouldnt be pushed to Github
+- You can find the api key in lib/shared/utils/app_constants.dart ideally this key is meant to be in a special .env file and also shouldnt be pushed to Github
 
-2. For the Dev Console on the Ably website:
-
-a. The Channel Name is order
-
-b. Possible message data that can be published are placed,accepted,picked,transit,arrived,delivered.
-
-c. The Event name and clientId should be left empty
+- For the Dev Console on the Ably website:
+The Channel Name is order
+Possible message data that can be published are placed,accepted,picked,transit,arrived,delivered.
+The Event name and clientId should be left empty
 
 
 
