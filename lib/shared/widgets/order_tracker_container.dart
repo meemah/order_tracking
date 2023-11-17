@@ -82,9 +82,20 @@ class _OrderTrackerContainerState extends State<OrderTrackerContainer> {
                       Navigator.push(context, MaterialPageRoute(builder: (ctx) {
                     return const OrderStatusView();
                   })),
-                  child: Text(
-                    "Track your order",
-                    style: AppStyle.mediumTextMedium(color: Colors.white),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Track your order",
+                        style: AppStyle.mediumTextMedium(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.chevron_right_sharp,
+                        color: Colors.white,
+                        size: 20.sp,
+                      )
+                    ],
                   ),
                 )
               ],

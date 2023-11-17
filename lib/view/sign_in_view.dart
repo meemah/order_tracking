@@ -19,67 +19,72 @@ class SignInView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Spacer(),
-            Text(
-              "Order your\nfavourite foods!",
-              style: AppStyle.largeTextRegular(
-                fontWeight: FontWeight.bold,
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/shopping.png"))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              Text(
+                "Order your\nfavourite foods!",
+                style: AppStyle.largeTextRegular(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const YMargin(8),
-            Text(
-              "Eat fresh food and be healthy",
-              style: AppStyle.mediumTextRegular(
-                color: AppColors.greyScale3,
+              const YMargin(8),
+              Text(
+                "Eat fresh food and be healthy",
+                style: AppStyle.mediumTextRegular(
+                  color: AppColors.greyScale3,
+                ),
               ),
-            ),
-            const YMargin(20),
-            Consumer<AuthViewModel>(builder: (ctx, viewModel, _) {
-              return Row(
-                children: [
-                  Expanded(
-                      child: SignInButton(
-                          color: Colors.black,
-                          imageUrl: "assets/icons/github.png",
-                          onTap: () {
-                            viewModel.gitHubSignIn();
-                            if (viewModel.signInResponse.status ==
-                                Status.COMPLETED) {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (ctx) {
-                                return HomeView(
-                                  userCredential:
-                                      viewModel.signInResponse.data!,
-                                );
-                              }));
-                            }
-                          })),
-                  const XMargin(10),
-                  Expanded(
-                      child: SignInButton(
-                          color: Colors.red,
-                          imageUrl: "assets/icons/google.png",
-                          onTap: () async {
-                            await viewModel.googleSignIn();
-                            if (viewModel.signInResponse.status ==
-                                Status.COMPLETED) {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (ctx) {
-                                return HomeView(
-                                  userCredential:
-                                      viewModel.signInResponse.data!,
-                                );
-                              }));
-                            }
-                          }))
-                ],
-              );
-            }),
-            const YMargin(40),
-          ],
+              const YMargin(20),
+              Consumer<AuthViewModel>(builder: (ctx, viewModel, _) {
+                return Row(
+                  children: [
+                    Expanded(
+                        child: SignInButton(
+                            color: Colors.red,
+                            imageUrl: "assets/icons/google.png",
+                            onTap: () async {
+                              await viewModel.googleSignIn();
+                              if (viewModel.signInResponse.status ==
+                                  Status.COMPLETED) {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (ctx) {
+                                  return HomeView(
+                                    userCredential:
+                                        viewModel.signInResponse.data!,
+                                  );
+                                }));
+                              }
+                            })),
+                    const XMargin(10),
+                    Expanded(
+                        child: SignInButton(
+                            color: Colors.black,
+                            imageUrl: "assets/icons/github.png",
+                            onTap: () async {
+                              await viewModel.gitHubSignIn();
+                              if (viewModel.signInResponse.status ==
+                                  Status.COMPLETED) {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (ctx) {
+                                  return HomeView(
+                                    userCredential:
+                                        viewModel.signInResponse.data!,
+                                  );
+                                }));
+                              }
+                            })),
+                  ],
+                );
+              }),
+              const YMargin(40),
+            ],
+          ),
         ),
       ),
     );

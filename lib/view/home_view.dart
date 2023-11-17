@@ -101,9 +101,21 @@ class HomeView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              order.title,
-                              style: AppStyle.mediumTextMedium(),
+                            RichText(
+                              text: TextSpan(
+                                  style: AppStyle.mediumTextMedium()
+                                      .copyWith(fontFamily: "Mulish"),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: order.title,
+                                    ),
+                                    TextSpan(
+                                        text: "  x${order.quantity}",
+                                        style: AppStyle.normalTextRegular(
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.grey)),
+                                  ]),
+                              textAlign: TextAlign.center,
                             ),
                             const XMargin(4),
                             Text(

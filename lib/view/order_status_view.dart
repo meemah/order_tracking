@@ -53,15 +53,34 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           OrderStatusModel.statusHistory[index];
                       bool isSelected = (viewModel.status.data?.index ?? 0) >=
                           orderStatus.orderStatus.index;
-                      return Padding(
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10, left: 20),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 20),
+                            horizontal: 10, vertical: 10),
+                        decoration: isSelected
+                            ? BoxDecoration(
+                                color: Colors.blueGrey.shade50,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.green))
+                            : null,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              orderStatus.title,
-                              style: AppStyle.mediumTextMedium(),
+                            Row(
+                              children: [
+                                Text(
+                                  orderStatus.title,
+                                  style: AppStyle.mediumTextMedium(),
+                                ),
+                                const XMargin(5),
+                                isSelected
+                                    ? const Icon(
+                                        Icons.check_circle_outline_sharp,
+                                        color: Colors.green,
+                                        size: 18,
+                                      )
+                                    : Container()
+                              ],
                             ),
                             const YMargin(3),
                             Text(
