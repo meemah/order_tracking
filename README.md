@@ -7,12 +7,11 @@ or you can follow:
 
 - You can find the api key in lib/shared/utils/app_constants.dart ideally this key is meant to be in a special .env file and also shouldnt be pushed to Github
 
-- For the Dev Console on the Ably website:
-The Channel Name is order. 
+- The Channel Name is order. 
 
-Possible message data that can be published are placed,accepted,picked,transit,arrived,delivered.
+- Possible message data that can be published are placed,accepted,picked,transit,arrived,delivered.
 
-The Event name and clientId should be left empty
+- The Event name and clientId should be left empty
 
 
 
