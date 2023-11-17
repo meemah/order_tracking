@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
-          title: 'Order Tracking',
+          title: 'Order Tracking - Maimunah',
           theme: ThemeData(
             fontFamily: "Mulish",
             visualDensity: VisualDensity.adaptivePlatformDensity,
